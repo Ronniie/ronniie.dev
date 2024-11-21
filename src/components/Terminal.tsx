@@ -6,6 +6,7 @@ import socialsCommand from "../app/commands/socials";
 import selfhostedCommand from "../app/commands/selfhosted";
 import exitCommand from "../app/commands/exit";
 import unknownCommand from "../app/commands/unknown";
+import sourceCommand from "../app/commands/source";
 
 const Terminal: React.FC = () => {
     const [input, setInput] = useState("");
@@ -20,7 +21,7 @@ const Terminal: React.FC = () => {
     const terminalEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const commandsList = ["help", "socials", "exit", "selfhosted"];
+    const commandsList = ["help", "socials", "exit", "selfhosted", "source"];
 
     const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -42,6 +43,7 @@ const Terminal: React.FC = () => {
             socials: socialsCommand,
             exit: () => exitCommand(setInputDisabled, setOutput), // Pass control functions
             selfhosted: selfhostedCommand,
+            source: sourceCommand,
         };
 
         const commandOutput =
