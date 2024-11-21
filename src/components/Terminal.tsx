@@ -3,24 +3,30 @@
 import { useState, useRef, useEffect } from "react";
 import helpCommand from "../app/commands/help";
 import socialsCommand from "../app/commands/socials";
-import selfhostedCommand from "../app/commands/selfhosted"
+import selfhostedCommand from "../app/commands/selfhosted";
 import exitCommand from "../app/commands/exit";
 import unknownCommand from "../app/commands/unknown";
-// Dynamically import React Icons with client-side rendering
 
 const Terminal: React.FC = () => {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState<JSX.Element[]>([<MOTD key="motd" />]);
     const [history, setHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState<number | null>(null);
+    const [suggestion, setSuggestion] = useState<string | null>(null); // For live suggestions
 
     const terminalEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const commandsList = ["help", "socials", "exit", "selfhosted"];
+    useEffect(() => {
+        window.scrollTo(0, 0); // Automatically scroll to the top
+    }, []);
+
+
     const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // If the input is empty, add a blank line and return
+        // If the input is empty, add a blank line
         if (input.trim() === "") {
             setOutput((prev) => [
                 ...prev,
@@ -49,10 +55,18 @@ const Terminal: React.FC = () => {
         setHistory((prev) => [...prev, input]);
         setHistoryIndex(null);
         setInput("");
+        setSuggestion(null); // Clear suggestion after submission
     };
 
-
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Tab") {
+            e.preventDefault(); // Prevent browser default behavior
+            if (suggestion) {
+                setInput(suggestion);
+                setSuggestion(null); // Clear suggestion after Tab
+            }
+        }
+
         if (history.length === 0) return;
 
         if (e.key === "ArrowUp") {
@@ -84,6 +98,17 @@ const Terminal: React.FC = () => {
         }
     };
 
+    const handleInputChange = (value: string) => {
+        setInput(value);
+
+        // Suggest commands dynamically
+        const normalizedInput = value.toLowerCase();
+        const matchedCommand = commandsList.find((command) =>
+            command.startsWith(normalizedInput)
+        );
+        setSuggestion(matchedCommand || null);
+    };
+
     useEffect(() => {
         terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [output]);
@@ -100,23 +125,39 @@ const Terminal: React.FC = () => {
                     </div>
                 ))}
             </div>
-            <form onSubmit={handleInput} className="flex items-center mt-2">
+            <form onSubmit={handleInput} className="flex items-center mt-2 relative">
                 <span className="text-green-500">$</span>
-                <input
-                    ref={inputRef}
-                    type="text"
-                    className="bg-black text-white outline-none flex-1 ml-2"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    autoFocus
-                />
+                <div className="relative flex-1 ml-2">
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        className="bg-black text-white outline-none w-full"
+                        value={input}
+                        onChange={(e) => handleInputChange(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        autoFocus
+                    />
+                    {suggestion && input.trim() !== suggestion && (
+                        <div
+                            className="absolute top-0 left-0 text-gray-500"
+                            style={{
+                                opacity: 0.5,
+                                pointerEvents: "none",
+                                paddingLeft: "2px",
+                            }}
+                        >
+                            {input}
+                            <span className="text-gray-400">
+                                {suggestion.slice(input.length)}
+                            </span>
+                        </div>
+                    )}
+                </div>
             </form>
             <div ref={terminalEndRef}></div>
         </div>
     );
 };
-
 
 const MOTD = () => {
     const socialsOutput = socialsCommand(false);
@@ -125,7 +166,9 @@ const MOTD = () => {
     return (
 
         <>
-            <div className="text-green-400">
+            <div
+                className="overflow-x-auto whitespace-pre font-mono text-xs sm:text-sm md:text-base text-green-400"
+            >
                 {`  _____                   _ _           _            `}
                 {`\n |  __ \\                 (_|_)         | |           `}
                 {`\n | |__) |___  _ __  _ __  _ _  ___   __| | _____   __`}
