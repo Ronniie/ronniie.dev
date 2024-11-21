@@ -12,35 +12,33 @@ const Terminal: React.FC = () => {
     const [output, setOutput] = useState<JSX.Element[]>([<MOTD key="motd" />]);
     const [history, setHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState<number | null>(null);
-    const [suggestion, setSuggestion] = useState<string | null>(null); // For live suggestions
+    const [suggestion, setSuggestion] = useState<string | null>(null);
+    const [inputDisabled, setInputDisabled] = useState(false); // Disable input after exit
 
     const terminalEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const commandsList = ["help", "socials", "exit", "selfhosted"];
-    useEffect(() => {
-        window.scrollTo(0, 0); // Automatically scroll to the top
-    }, []);
-
 
     const handleInput = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // If the input is empty, add a blank line
+        if (inputDisabled) return; // Prevent handling input if disabled
+
         if (input.trim() === "") {
             setOutput((prev) => [
                 ...prev,
-                <div key={`blank-${prev.length}`}>&nbsp;</div>, // Blank line
+                <div key={`blank-${prev.length}`}>&nbsp;</div>,
             ]);
-            setInput(""); // Clear the input field
+            setInput("");
             return;
         }
 
         const normalizedInput = input.toLowerCase();
-        const commands: { [key: string]: () => JSX.Element[] } = {
+        const commands: { [key: string]: (setInputDisabled: any, setOutput: any) => JSX.Element[] } = {
             help: helpCommand,
             socials: socialsCommand,
-            exit: exitCommand,
+            exit: () => exitCommand(setInputDisabled, setOutput), // Pass control functions
             selfhosted: selfhostedCommand,
         };
 
@@ -55,53 +53,12 @@ const Terminal: React.FC = () => {
         setHistory((prev) => [...prev, input]);
         setHistoryIndex(null);
         setInput("");
-        setSuggestion(null); // Clear suggestion after submission
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Tab") {
-            e.preventDefault(); // Prevent browser default behavior
-            if (suggestion) {
-                setInput(suggestion);
-                setSuggestion(null); // Clear suggestion after Tab
-            }
-        }
-
-        if (history.length === 0) return;
-
-        if (e.key === "ArrowUp") {
-            e.preventDefault();
-            if (historyIndex === null) {
-                setHistoryIndex(history.length - 1);
-                setInput(history[history.length - 1]);
-            } else if (historyIndex > 0) {
-                setHistoryIndex((prev) => {
-                    const newIndex = prev! - 1;
-                    setInput(history[newIndex]);
-                    return newIndex;
-                });
-            }
-        }
-
-        if (e.key === "ArrowDown") {
-            e.preventDefault();
-            if (historyIndex !== null && historyIndex < history.length - 1) {
-                setHistoryIndex((prev) => {
-                    const newIndex = prev! + 1;
-                    setInput(history[newIndex]);
-                    return newIndex;
-                });
-            } else {
-                setHistoryIndex(null);
-                setInput("");
-            }
-        }
+        setSuggestion(null);
     };
 
     const handleInputChange = (value: string) => {
         setInput(value);
 
-        // Suggest commands dynamically
         const normalizedInput = value.toLowerCase();
         const matchedCommand = commandsList.find((command) =>
             command.startsWith(normalizedInput)
@@ -125,39 +82,48 @@ const Terminal: React.FC = () => {
                     </div>
                 ))}
             </div>
-            <form onSubmit={handleInput} className="flex items-center mt-2 relative">
-                <span className="text-green-500">$</span>
-                <div className="relative flex-1 ml-2">
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        className="bg-black text-white outline-none w-full"
-                        value={input}
-                        onChange={(e) => handleInputChange(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        autoFocus
-                    />
-                    {suggestion && input.trim() !== suggestion && (
-                        <div
-                            className="absolute top-0 left-0 text-gray-500"
-                            style={{
-                                opacity: 0.5,
-                                pointerEvents: "none",
-                                paddingLeft: "2px",
-                            }}
-                        >
-                            {input}
-                            <span className="text-gray-400">
-                                {suggestion.slice(input.length)}
-                            </span>
-                        </div>
-                    )}
-                </div>
+            <form
+                onSubmit={handleInput}
+                className="flex items-center mt-2 relative"
+            >
+                {!inputDisabled && ( // Hide the prompt if input is disabled
+                    <span className="text-green-500">$</span>
+                )}
+                {!inputDisabled && (
+                    <div className="relative flex-1 ml-2">
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            className="bg-black text-white outline-none w-full"
+                            value={input}
+                            onChange={(e) => handleInputChange(e.target.value)}
+                            autoFocus
+                            disabled={inputDisabled} // Disable input when exited
+                        />
+                        {suggestion && input.trim() !== suggestion && (
+                            <div
+                                className="absolute top-0 left-0 text-gray-500"
+                                style={{
+                                    opacity: 0.5,
+                                    pointerEvents: "none",
+                                    paddingLeft: "2px",
+                                }}
+                            >
+                                {input}
+                                <span className="text-gray-400">
+                        {suggestion.slice(input.length)}
+                    </span>
+                            </div>
+                        )}
+                    </div>
+                )}
             </form>
+
             <div ref={terminalEndRef}></div>
         </div>
     );
 };
+
 
 const MOTD = () => {
     const socialsOutput = socialsCommand(false);
