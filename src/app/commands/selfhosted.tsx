@@ -10,7 +10,7 @@ const SiPaperlessngx = dynamic(() => import("react-icons/si").then((mod) => mod.
 const selfhostedCommand= (showHeader = true) => [
     <div key="selfHosted">
         {showHeader && (
-        <strong className="text-yellow-400">⚙️ SELF-HOSTED TOOLS</strong>
+        <strong className="text-yellow-400">⚙️ Self-Hosted Software in my HomeLab</strong>
         )}
         <div className="text-white flex items-center mt-2">
             <SiProxmox className="text-orange-500 mr-2"/>
@@ -21,7 +21,7 @@ const selfhostedCommand= (showHeader = true) => [
             Portainer: Orchestrating Docker containers effortlessly.
         </div>
         <div className="text-white flex items-center mt-2">
-            <SiPlex className="text-blue-400 mr-2"/>
+            <SiPlex className="text-orange-500 mr-2"/>
             Plex: Streaming my curated media library.
         </div>
         <div className="text-white flex items-center mt-2">
