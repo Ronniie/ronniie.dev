@@ -152,7 +152,7 @@ const Terminal: React.FC = () => {
         }
     };
 
-    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleClick = () => {
         const selection = window.getSelection();
         if (selection && selection.toString()) {
             return;
@@ -206,19 +206,19 @@ const MOTD = () => (
             {`\n |_|  \\_\\___/|_| |_|_| |_|_|_|\\___(_)__,_|\\___| \\_/  `}
         </div>
         <div className="text-green-300 mt-4">
-            <strong>Welcome to Ronnie's Development Terminal!</strong>
+            <strong>Welcome to Ronnie&#39;s Development Terminal!</strong>
         </div>
 
         <div className="border-t border-gray-700 my-4"/>
         <strong className="text-yellow-400">🎩 ABOUT THE DEV</strong>
         <p className="text-white">
-            Hi! I'm Ronnie—a developer passionate about blending code and design.
+            Hi! I&#39;m Ronnie—a developer passionate about blending code and design.
         </p>
         <p className="text-white">
             This site is my playground for testing and crafting innovative projects.
         </p>
         <p className="text-white">
-            When I'm not tinkering here, I'm programming for NullDaily LLC, building
+            When I&#39;m not tinkering here, I&#39;m programming for NullDaily LLC, building
             open-source tools to empower creators and developers.
         </p>
 
@@ -305,14 +305,14 @@ const MOTD = () => (
 
         <div className="border-t border-gray-700 my-4"/>
         <p className="text-green-300">
-            🌟 "Code, automate, and create with purpose. This isn't just development;
-            it's an adventure." 🌟
+            🌟 &#34;Code, automate, and create with purpose. This isn&#39;t just development;
+            it&#39;s an adventure.&#34; 🌟
         </p>
 
 
         <div className="border-t border-gray-700 my-4"/>
         <div className="text-gray-400 mt-2">
-            Type <span className="text-green-400">'help'</span> to see what you can do. Let’s explore together!
+            Type <span className="text-green-400">&#39;help&#39;</span> to see what you can do. Let’s explore together!
         </div>
     </>
 );
