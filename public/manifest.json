@@ -1,6 +1,6 @@
 {
-  "name": "Ronniie's Terminal",
-  "short_name": "Ronniie Terminal",
+  "name": "ronniie.dev",
+  "short_name": "ronniie.dev",
   "description": "A showcase of experimental projects hosted on *.ronniie.dev, and some fun tools.",
   "start_url": "/",
   "display": "standalone",
@@ -8,7 +8,7 @@
   "theme_color": "#f97316",
   "icons": [
     {
-      "src": "/favicon.ico",
+      "src": "/favicon.png",
       "sizes": "any",
       "type": "image/x-icon"
     }

@@ -14,12 +14,12 @@ export const metadata: Metadata = {
   robots: "index, follow",
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/favicon.ico', sizes: '16x16', type: 'image/x-icon' },
+      { url: '/favicon.png', sizes: 'any' },
+      { url: '/favicon.png', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.png', sizes: '16x16', type: 'image/x-icon' },
     ],
     apple: [
-      { url: '/favicon.ico', sizes: '180x180', type: 'image/x-icon' },
+      { url: '/favicon.png', sizes: '180x180', type: 'image/x-icon' },
     ],
   },
   openGraph: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "ronniie.dev",
     images: [
       {
-        url: '/favicon.ico',
+        url: '/favicon.png',
         width: 512,
         height: 512,
         alt: 'ronniie.dev favicon',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "ronniie.dev",
     description: "A showcase of experimental projects hosted on *.ronniie.dev. Each project is a unique experiment, from fun visualizations to useful tools.",
     creator: '@ronniie',
-    images: ['/favicon.ico'],
+    images: ['/favicon.png'],
   },
   manifest: '/manifest.json',
 };
@@ -56,6 +56,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
+      <head>
+        {/* Theme Colors */}
+        <meta name="theme-color" content="#f97316" />
+        <meta name="msapplication-navbutton-color" content="#f97316" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#f97316" />
+        {/* Favicon */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+      </head>
       <body className={inter.className} suppressHydrationWarning>
         {children}
       </body>
