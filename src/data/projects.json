@@ -27,6 +27,13 @@
       "icon": "📰",
       "url": "https://timelinecheck.ronniie.dev",
       "tags": ["Web", "Fun", "Interactive", "JavaScript"]
+    },
+    {
+      "name": "ZoneOut",
+      "description": "A fast-paced square collection game where you select and clear bouncing squares. Choose your difficulty and game mode, then try to achieve the highest score! Game Modes: Levels (progress through increasingly challenging levels), Endless (play indefinitely with increasing difficulty). Difficulty Levels: Easy (infinite lives, slower squares, 20% red squares), Medium (5 lives, moderate speed, 30% red squares), Hard (3 lives, fast squares, 40% red squares). Features: Smooth selection, combo system, time bonuses, particle effects, modern UI, responsive design. Play at zoneout.ronniie.dev.",
+      "icon": "🟧",
+      "url": "https://zoneout.ronniie.dev",
+      "tags": ["Web", "Game", "Fun", "Interactive", "JavaScript", "Canvas"]
     }
   ]
 } 
