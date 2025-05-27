@@ -1,0 +1,32 @@
+{
+  "projects": [
+    {
+      "name": "Is My Internet Working?",
+      "description": "A simple tool to check if your internet connection is working. No fancy stuff, just a yes or no. Free, instant, and reliable internet connection checker.",
+      "icon": "🌐",
+      "url": "https://ismyinternetworking.ronniie.dev",
+      "tags": ["Web", "Fun", "Interactive", "JavaScript"]
+    },
+    {
+      "name": "What's My Vibe?",
+      "description": "Check your current vibe with our fun and interactive vibe checker. Get instant vibe readings and discover your mood!",
+      "icon": "😊",
+      "url": "https://whatsmyvibe.ronniie.dev",
+      "tags": ["Web", "Fun", "Interactive", "JavaScript"]
+    },
+    {
+      "name": "HoldThisButton",
+      "description": "Test your patience and endurance with our button-holding challenge. How long can you hold the button?",
+      "icon": "🔘",
+      "url": "https://holdthisbutton.ronniie.dev",
+      "tags": ["Web", "Fun", "Interactive", "JavaScript"]
+    },
+    {
+      "name": "TimelineCheck",
+      "description": "Check if you're in the right timeline with our timeline checker. Get instant timeline readings and discover if you're in the correct reality!",
+      "icon": "📰",
+      "url": "https://timelinecheck.ronniie.dev",
+      "tags": ["Web", "Fun", "Interactive", "JavaScript"]
+    }
+  ]
+} 
