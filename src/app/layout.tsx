@@ -5,15 +5,13 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ronniie's Terminal",
+  title: "ronniie.dev",
   description: "A showcase of experimental projects hosted on *.ronniie.dev. Each project is a unique experiment, from fun visualizations to useful tools.",
   keywords: "terminal, projects, web development, experiments, tools, utilities",
   authors: [{ name: "Ronniie" }],
   creator: "Ronniie",
   publisher: "Ronniie",
   robots: "index, follow",
-  themeColor: "#f97316", // orange-500
-  viewport: "width=device-width, initial-scale=1",
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -28,15 +26,25 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://ronniie.dev',
-    title: "Ronniie's Terminal",
+    title: "ronniie.dev",
     description: "A showcase of experimental projects hosted on *.ronniie.dev. Each project is a unique experiment, from fun visualizations to useful tools.",
-    siteName: "Ronniie's Terminal",
+    siteName: "ronniie.dev",
+    images: [
+      {
+        url: '/favicon.ico',
+        width: 512,
+        height: 512,
+        alt: 'ronniie.dev favicon',
+        type: 'image/x-icon',
+      },
+    ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "Ronniie's Terminal",
+    card: 'summary',
+    title: "ronniie.dev",
     description: "A showcase of experimental projects hosted on *.ronniie.dev. Each project is a unique experiment, from fun visualizations to useful tools.",
     creator: '@ronniie',
+    images: ['/favicon.ico'],
   },
   manifest: '/manifest.json',
 };
