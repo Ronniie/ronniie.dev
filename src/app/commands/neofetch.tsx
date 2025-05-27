@@ -1,4 +1,4 @@
-import { Command } from "../../types/command";
+import { Command, CommandContext } from "../../types/command";
 
 // Add type declarations for Navigator properties
 declare global {
@@ -18,14 +18,21 @@ const neofetchCommand: Command = {
         description: "Display system information",
         icon: "🖥️",
     },
-    execute: (args: string[] = [], context?: { uptime: string }) => {
+    execute: (_, context?: CommandContext) => {
+        const platform = navigator.platform;
+        const userAgent = navigator.userAgent;
+        const language = navigator.language;
+        const vendor = navigator.vendor;
+        const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "Unknown";
+        const cores = navigator.hardwareConcurrency || "Unknown";
+
         const osInfo = {
-            platform: navigator.platform,
-            userAgent: navigator.userAgent,
-            language: navigator.language,
-            vendor: navigator.vendor,
-            memory: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : 'Unknown',
-            cores: navigator.hardwareConcurrency || 'Unknown',
+            platform: platform,
+            userAgent: userAgent,
+            language: language,
+            vendor: vendor,
+            memory: memory,
+            cores: cores,
         };
 
         // Enhanced OS detection

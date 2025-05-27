@@ -73,7 +73,7 @@ const Terminal: React.FC = () => {
             setInput("");
             return;
         }
-        const cmd = args[0].toLowerCase();
+        const cmd = args[0]?.toLowerCase() || "";
         const commandArgs = args.slice(1).map(arg => arg.replace(/^"|"$/g, '')); // Remove quotes
         const command = commands[cmd];
 
@@ -282,11 +282,14 @@ const MOTD = () => {
 
             <div className="border-t border-gray-700 my-4"/>
             <div className="text-gray-400 mt-2">
-                Type <span className="text-orange-500">&#39;help&#39;</span> to see available commands. Let's explore
+                Type <span className="text-orange-500">&#39;help&#39;</span> to see available commands. Let&#39;s explore
                 together!
             </div>
             <div className="text-gray-400 mt-2">
                 Want to learn more about me? Visit <a href="https://ronniie.com" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300">ronniie.com</a> for my full portfolio and blog.
+            </div>
+            <div className="text-gray-400 mt-1">
+                Available projects: {projects?.projects?.map(p => p.name).join(", ") || "None"}
             </div>
         </>
     );

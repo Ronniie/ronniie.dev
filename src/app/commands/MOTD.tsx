@@ -1,57 +1,45 @@
-import socialsCommand from "./socials";
-import selfhostedCommand from "./selfhosted";
-
 const motdCommand = () => {
-    const socialsOutput = socialsCommand(false);
-    const selfHostedOutput = selfhostedCommand(false);
-
     return [
-        <div key="motd-header" className="text-green-400">
-            {`  _____                   _ _           _            `}
-            {`\n |  __ \\                 (_|_)         | |           `}
-            {`\n | |__) |___  _ __  _ __  _ _  ___   __| | _____   __`}
-            {`\n |  _  // _ \\| '_ \\| '_ \\| | |/ _ \\ / _\` |/ _ \\ \\ / /`}
-            {`\n | | \\ \\ (_) | | | | | | | | |  __/| (_| |  __/\\ V / `}
-            {`\n |_|  \\_\\___/|_| |_|_| |_|_|_|\\___(_)__,_|\\___| \\_/  `}
-        </div>,
-        <div key="motd-welcome" className="text-green-300 mt-4">
-            <strong>Welcome to Ronnie&#39;s Development Terminal!</strong>
-        </div>,
+        <div key="motd" className="font-mono">
+            <div className="text-orange-500">
+                {`  _____                   _ _           _            `}
+                {`\n |  __ \\                 (_|_)         | |           `}
+                {`\n | |__) |___  _ __  _ __  _ _  ___   __| | _____   __`}
+                {`\n |  _  // _ \\| '_ \\| '_ \\| | |/ _ \\ / _\` |/ _ \\ \\ / /`}
+                {`\n | | \\ \\ (_) | | | | | | | | |  __/| (_| |  __/\\ V / `}
+                {`\n |_|  \\_\\___/|_| |_|_| |_|_|_|\\___(_)__,_|\\___| \\_/  `}
+            </div>
+            <div className="text-orange-400 mt-4">
+                <strong>Welcome to Ronnie&#39;s Project Terminal!</strong>
+            </div>
 
-        <div className="border-t border-gray-700 my-4" key="motd-divider-1" />,
-        <strong key="motd-about-header" className="text-yellow-400">🎩 ABOUT THE DEV</strong>,
-        <p key="motd-about-1" className="text-white">
-            Hi! I&#39;m Ronnie—a developer passionate about blending code and design.
-        </p>,
-        <p key="motd-about-2" className="text-white">
-            This site is my playground for testing and crafting innovative projects.
-        </p>,
-        <p key="motd-about-3" className="text-white">
-            When I&#39;m not tinkering here, I&#39;m programming for NullDaily LLC, building
-            open-source tools to empower creators and developers.
-        </p>,
+            <div className="border-t border-gray-700 my-4"/>
+            <strong className="text-orange-500">🚀 ABOUT THIS TERMINAL</strong>
+            <p className="text-gray-400">
+                This is a showcase of my experimental projects hosted on *.ronniie.dev.
+            </p>
+            <p className="text-gray-400">
+                Each project is a unique experiment, from fun visualizations to useful tools.
+            </p>
+            <p className="text-gray-400">
+                Feel free to explore and interact with them!
+            </p>
 
-        <div className="border-t border-gray-700 my-4" key="motd-divider-2" />,
-        <strong key="motd-socials-header" className="text-yellow-400">📡 SOCIALS</strong>,
-        ...socialsOutput,
+            <div className="border-t border-gray-700 my-4"/>
+            <p className="text-orange-400">
+                🌟 &#34;Every project is an adventure in learning and creation.&#34; 🌟
+            </p>
 
-        <div className="border-t border-gray-700 my-4" key="motd-divider-3" />,
-        <strong key="motd-selfhosted-header" className="text-yellow-400">⚙️ SELF-HOSTED TOOLS</strong>,
-        ...selfHostedOutput,
-
-        <div className="border-t border-gray-700 my-4" key="motd-divider-4" />,
-        <p key="motd-quote" className="text-green-300">
-            🌟 &#34;Code, automate, and create with purpose. This isn&#39;t just development;
-            it&#39;s an adventure.&#34; 🌟
-        </p>,
-        <div className="border-t border-gray-700 my-4" key="motd-divider-5" />,
-        <div key="motd-footer" className="text-gray-400 mt-2">
-            Type <span className="text-green-400">&#39;help&#39;</span> to see what you can do. Let’s explore
-            together!
-        </div>,
+            <div className="border-t border-gray-700 my-4"/>
+            <div className="text-gray-400 mt-2">
+                Type <span className="text-orange-500">&#39;help&#39;</span> to see available commands. Let&#39;s explore
+                together!
+            </div>
+            <div className="text-gray-400 mt-2">
+                Want to learn more about me? Visit <a href="https://ronniie.com" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300">ronniie.com</a> for my full portfolio and blog.
+            </div>
+        </div>
     ];
 };
 
-export const name = "motd";
-export const description = "Display the Message of the Day.";
 export default motdCommand;
